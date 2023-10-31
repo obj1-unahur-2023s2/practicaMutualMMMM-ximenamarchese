@@ -1,0 +1,73 @@
+import actividades.*
+import socios.*
+
+describe "Test de ClaseDeGimnasia"{
+	
+	const claseDeGim = new ClaseDeGimnasia()
+	
+	test "en las clases de gimnsia solo se habla español"{
+		assert.equals(#{"español"},claseDeGim.idiomas())
+	}
+	test "las clases de gimnasia llevan un dia"{
+		assert.equals(1, claseDeGim.diasQueLleva())
+	}
+	test"las clases de gimnasia implican esfuerzo"{
+		assert.that(claseDeGim.implicaEsfuerzo())
+	}
+	test "las clases de gimnasia nunca sirven para broncearse"{
+		assert.notThat(claseDeGim.sirveParaBroncearse())
+	}
+}
+
+describe "Test de TallerLiterario"{
+	
+	const libro1 = new Libro(idioma = "ingles", paginas = 200, nombreDeAutor = "Julio Verne")
+	const libro2 = new Libro(idioma = "español", paginas = 450, nombreDeAutor = "Borges")
+	const libro3 = new Libro(idioma = "chino", paginas = 501, nombreDeAutor = "Cortazar")
+	const tallerLit = new TallerLiterario(libros = #{libro1, libro2, libro3})
+	const roque = new Socio (maximoDeActividades = 2, edad = 40, idiomasQueHabla = #{"español","coreano"})
+	
+	test "Se usan 3 idiomas en el taller"{
+		assert.equals(3, tallerLit.cantidadDeLibros())
+	}
+	test "Lleva 4 dias"{
+		assert.equals(4, tallerLit.diasQueLleva())
+	}
+	test "El taller implica esfuerzo"{
+		assert.that(tallerLit.implicaEsfuerzo())
+	}
+	test "El taller no sirve para broncearse"{
+		assert.notThat(tallerLit.sirveParaBroncearse())
+	}
+	test "El taller es recomendado para el socio roque"{
+		assert.that(tallerLit.esRecomendadaParaSocio(roque))
+	}
+}
+
+describe "Test de Viajes"{
+	
+	const viajePlaya = new ViajeDePlaya(largo = 200, idiomas = #{"español", "portugues"})
+	const excursionCiudad = new ExcursionACiudad(atracciones = 6)
+	const excursionCiudadTropical = new ExcursionACiudadTropical(atracciones = 2)
+	const trekking = new Trekking(kmSenderos = 100, diasDeSolXAnio = 220)
+	
+	test ""
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

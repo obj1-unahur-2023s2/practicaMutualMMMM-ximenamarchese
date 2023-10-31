@@ -1,0 +1,77 @@
+import socios.*
+import actividades.*
+
+
+describe "Testing de Socios" {
+	
+	const roque = new Socio (maximoDeActividades = 2, edad = 40, idiomasQueHabla = #{"español","coreano"})
+	const ana = new Socio (maximoDeActividades = 3, edad = 35)
+	
+	const viajeDePlaya = new ViajeDePlaya(largo = 2000)
+	const viajeDePlaya2 = new ViajeDePlaya(largo = 1000)
+	const claseDeGimnasia = new ClaseDeGimnasia()
+	
+	
+	method initialize() {
+		roque.realizarActividad(viajeDePlaya)
+		roque.realizarActividad(viajeDePlaya2)
+		ana.realizarActividad(viajeDePlaya)
+		ana.realizarActividad(viajeDePlaya2)
+		ana.realizarActividad(claseDeGimnasia)
+	}
+	
+	test "Roque es adorador del sol"{
+		assert.that(roque.esAdoradorDelSol())
+	}
+	test "Roque realiza actividades esforzadas"{
+		assert.equals(#{viajeDePlaya}, roque.actividadesEsforzadas())
+	}
+	test "Roque no puede realizar una clase de gimanasia"{
+		assert.notThat(roque.estaActividadEnLista(claseDeGimnasia))
+	}
+	test "Roque no puede realizar mas actividades ya que llego a su maximo"{
+		assert.equals(2,roque.cantidadDeActividades())
+	}
+	test "Ana puede realizar una clase de gimnasia"{
+		assert.that(ana.estaActividadEnLista(claseDeGimnasia))
+	}
+	test "Ana no es amante del sol" {
+		assert.notThat(ana.esAdoradorDelSol())
+	}
+	test "Ana actividades Esforzadas"{
+		assert.equals(#{viajeDePlaya, claseDeGimnasia}, ana.actividadesEsforzadas())
+	}
+	test "Roque habla dos idiomas"{
+		assert.equals(2, roque.cantidadDeIdiomasQueHabla())
+	}
+}
+
+
+describe "Testing de tipos de Socios"{
+	
+	const socioTranquilo = new SocioTranquilo(maximoDeActividades = 2, edad = 28)
+	const socioCoherente = new SocioCoherente(maximoDeActividades = 3, edad = 40)
+	const socioRelajado = new SocioRelajado(maximoDeActividades = 1, edad = 21, idiomasQueHabla = #{"español", "quechua"})
+	
+	const viajeDePlaya = new ViajeDePlaya(largo = 2000, idiomas = #{"español"})
+	const viajeDePlaya2 = new ViajeDePlaya(largo = 1000, idiomas = #{"frances"})
+	const claseDeGimnasia = new ClaseDeGimnasia()
+	
+	method initialize(){
+		socioCoherente.realizarActividad(viajeDePlaya)
+		socioCoherente.realizarActividad(viajeDePlaya2)
+	}
+	
+	test "Al socio tranquilo le atrae el viajeDePlaya"{
+		assert.that(socioTranquilo.leAtraeActividad(viajeDePlaya))
+	}
+	test "Al socio coherente no le atrae la claseDeGimnasia"{
+		assert.notThat(socioTranquilo.leAtraeActividad(claseDeGimnasia))
+	}
+	test "Al socio relajado le atrae el viajeDePlaya"{
+		assert.that(socioRelajado.leAtraeActividad(viajeDePlaya))
+	}
+	test "Al socio relajado no le atra el viajeDePlaya2"{
+		assert.notThat(socioRelajado.leAtraeActividad(viajeDePlaya2))
+	}
+}

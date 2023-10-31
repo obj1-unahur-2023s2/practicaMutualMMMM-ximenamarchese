@@ -13,17 +13,16 @@ class Socio {
 		actividadesRealizadas.add(unaActividad)
 	}
 	method cantidadDeActividades() = actividadesRealizadas.size()
-	method leAtraeActividad(unaActividad)
 	method estaActividadEnLista(unaActividad) = actividadesRealizadas.contains(unaActividad)
 	method cantidadDeIdiomasQueHabla() = idiomasQueHabla.size()
 }
 
 class SocioTranquilo inherits Socio {
-	override method leAtraeActividad(unaActividad) = unaActividad.diasQueLleva() >= 4
+	 method leAtraeActividad(unaActividad) = unaActividad.diasQueLleva() >= 4
 }
 
 class SocioCoherente inherits Socio {
-	override method leAtraeActividad(unaActividad){
+	 method leAtraeActividad(unaActividad){
 		if (self.esAdoradorDelSol())
 			return unaActividad.sirveParaBroncearse()
 		else
@@ -32,5 +31,5 @@ class SocioCoherente inherits Socio {
 }
 
 class SocioRelajado inherits Socio {
-	override method leAtraeActividad(unaActividad) = not idiomasQueHabla.intersection(unaActividad.idiomas()).isEmpty()
+	 method leAtraeActividad(unaActividad) = not idiomasQueHabla.intersection(unaActividad.idiomas()).isEmpty()
 }
